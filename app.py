@@ -1,5 +1,6 @@
 # all the imports
-import sqlite3
+import os
+
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
@@ -17,7 +18,7 @@ PASSWORD = 'default'
 
 # create our little application
 app = Flask(__name__)
-app.config.from_object(os.environ['APP_SETTINGS'])
+app.config.from_object(os.environ.get('APP_SETTINGS'))
 
 oembed_providers = bootstrap_basic()
 add_oembed_filters(app, oembed_providers)
@@ -29,7 +30,7 @@ def index():
 
 
 @app.route('/<name>')
-def name_route():
+def name_route(name):
     return "Hello {}!".format(name)
 
 
