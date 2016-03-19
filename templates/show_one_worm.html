@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
     {% if worm %}
-        <h1> {{worm}} </h1>
+        <h1 class="worm-title"> {{worm.title}} </h1>
+        {{worm.url |oembed(maxwidth=500) }}
     {% endif %}
-    {# show a flash player for the youtube video #}
-    {{ "http://www.youtube.com/watch?v=mQEWI1cn7HY"|oembed(maxwidth=500) }}
 {% endblock %}
