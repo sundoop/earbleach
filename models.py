@@ -5,8 +5,8 @@ from sqlalchemy.dialects.postgresql import JSON
 class Worm(db.Model):
     __tablename__ = 'worms'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String())
-    url = db.Column(db.String())
+    title = db.Column(db.String(), unique=True)
+    url = db.Column(db.String(), unique=True)
 
     def __init__(self, title, url):
         self.title = title
