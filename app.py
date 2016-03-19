@@ -1,24 +1,16 @@
 # all the imports
 import os
 
-from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash
-from contextlib import closing
+from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
 from micawber.providers import bootstrap_basic
 from micawber.contrib.mcflask import add_oembed_filters
 
 
-print os.environ['APP_SETTINGS']
-# configuration
-DATABASE = 'bleacher.db'
-DEBUG = True
-SECRET_KEY = 'production_key'
-USERNAME = 'admin'
-PASSWORD = 'default'
-
 # create our little application
 app = Flask(__name__)
 app.config.from_object(os.environ.get('APP_SETTINGS'))
+db = SQLAlchemy(app)
 
 oembed_providers = bootstrap_basic()
 add_oembed_filters(app, oembed_providers)
