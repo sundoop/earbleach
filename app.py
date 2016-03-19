@@ -1,7 +1,7 @@
 # all the imports
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from micawber.providers import bootstrap_basic
 from micawber.contrib.mcflask import add_oembed_filters
@@ -19,7 +19,7 @@ add_oembed_filters(app, oembed_providers)
 
 @app.route('/')
 def index():
-    return "Hellow World!"
+    return render_template('show_one_worm.html')
 
 
 @app.route('/<name>')
