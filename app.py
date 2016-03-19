@@ -7,6 +7,7 @@ from micawber.providers import bootstrap_basic
 from micawber.contrib.mcflask import add_oembed_filters
 
 
+print os.environ['APP_SETTINGS']
 # configuration
 DATABASE = 'bleacher.db'
 DEBUG = True
@@ -16,16 +17,21 @@ PASSWORD = 'default'
 
 # create our little application
 app = Flask(__name__)
-app.config.from_object(__name__)
+app.config.from_object(os.environ['APP_SETTINGS'])
 
 oembed_providers = bootstrap_basic()
 add_oembed_filters(app, oembed_providers)
 
 
 @app.route('/')
-def show_one_worm():
+def index():
     return "Hellow World!"
-    return render_template('show_one_worm.html', worm=None)
+
+
+@app.route('/<name>')
+def name_route():
+    return "Hello {}!".format(name)
+
 
 if __name__ == "__main__":
     app.run()
